@@ -7,4 +7,4 @@ public interface Emprestavel {
     void devolver(LocalDate dataDevolucaoEfetiva);
     LocalDate getDataPrevistaDevolucao();
     boolean isDisponivel();
-}W
+}

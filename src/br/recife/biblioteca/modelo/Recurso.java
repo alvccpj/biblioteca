@@ -7,36 +7,36 @@ public abstract class Recurso {
     private String titulo;
     private int anoPublicacao;
 
-protected Recurso(String id, String titulo, int anoPublicacao) {
-    this.id = Objects.requireNonNull(id, "id não pode ser nulo");
-    setTitulo(titulo);
-    setAnoPublicacao(anoPublicacao);
-}
-
-public String getId() { return id; }
-
-public String getTitulo() { return titulo; }
-
-public void setTitulo(String titulo) {
-    if (titulo == null || titulo.isBlank()) {
-        throw new IllegalArgumentException("titulo não pode ser vazio");
+    protected Recurso(String id, String titulo, int anoPublicacao) {
+        this.id = Objects.requireNonNull(id, "id não pode ser nulo");
+        setTitulo(titulo);
+        setAnoPublicacao(anoPublicacao);
     }
-    this.titulo = titulo.trim();
-}
 
-public int getAnoPublicacao() { return anoPublicacao; }
+    public String getId() { return id; }
 
-public void setAnoPublicacao(int anoPublicacao) {
-    if (anoPublicacao <= 0) throw new IllegalArgumentException("anoPublicacao deve ser > 0");
-    this.anoPublicacao = anoPublicacao;
-}
+    public String getTitulo() { return titulo; }
 
-public String getDescricao() {
-    return String.format("[%s] %s (%d)", getClass().getSimpleName(), titulo, anoPublicacao);
-}
+    public void setTitulo(String titulo) {
+        if (titulo == null || titulo.isBlank()) {
+            throw new IllegalArgumentException("titulo não pode ser vazio");
+        }
+        this.titulo = titulo.trim();
+    }
 
-public abstract double calcularMulta(long diasAtraso, Usuario user);
+    public int getAnoPublicacao() { return anoPublicacao; }
 
-@Override
-public String toString() { return getDescricao(); }
+    public void setAnoPublicacao(int anoPublicacao) {
+        if (anoPublicacao <= 0) throw new IllegalArgumentException("anoPublicacao deve ser > 0");
+        this.anoPublicacao = anoPublicacao;
+    }
+
+    public String getDescricao() {
+        return String.format("[%s] %s (%d)", getClass().getSimpleName(), titulo, anoPublicacao);
+    }
+
+    public abstract double calcularMulta(long diasAtraso, Usuario user);
+
+    @Override
+    public String toString() { return getDescricao(); }
 }
