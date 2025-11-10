@@ -7,7 +7,6 @@ void prazoPolimorfico() {
     assertEquals(7, new Visitante("3","V","3").prazoDiasPadrao());
 }
 
-
 @Test
 void composicaoCapitulos() {
     Livro l = new Livro("L2","Livro",2021);
@@ -15,7 +14,6 @@ void composicaoCapitulos() {
     l.adicionarCapitulo(new Capitulo(2,"C2",8));
     assertEquals(2, l.getCapitulos().size());
 }
-
 
 @Test
 void impedirEmprestarIndisponivel() {
@@ -27,7 +25,6 @@ void impedirEmprestarIndisponivel() {
     b.emprestar("R1","U1");
     assertThrows(RuntimeException.class, () -> b.emprestar("R1","U1"));
 }
-
 
 @Test
 void midiaDigitalPrazoLimitado() {

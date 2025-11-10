@@ -27,11 +27,11 @@ public class BibliotecaCLI {
             op = Integer.parseInt(sc.nextLine());
             try {
                 switch (op) {
-                case 1 -> bib.listarDisponiveis().forEach(System.out::println);
-                case 2 -> bib.listarEmprestados().forEach(System.out::println);
+                case 1 -> doListarDisponiveis();
+                case 2 -> doListarEmprestados();
                 case 3 -> doEmprestar();
                 case 4 -> doDevolver();
-                case 5 -> bib.emprestimosAtrasados(java.time.LocalDate.now()).forEach(System.out::println);
+                case 5 -> doAtrasados();
                 case 6 -> doHistorico();
                 }
             } catch (Exception ex) {
@@ -60,8 +60,36 @@ public class BibliotecaCLI {
         System.out.print("ID Usuário: ");
         String idU = sc.nextLine();
         bib.historicoPorUsuario(idU).forEach(System.out::println);
+        confirmarOuEncerrar();
     }
-    
+
+    private void doListarDisponiveis() {
+        bib.listarDisponiveis().forEach(System.out::println);
+        confirmarOuEncerrar();
+    }
+
+    private void doListarEmprestados() {
+        bib.listarEmprestados().forEach(System.out::println);
+        confirmarOuEncerrar();
+    }
+
+    private void doAtrasados() {
+        bib.emprestimosAtrasados(java.time.LocalDate.now()).forEach(System.out::println);
+        confirmarOuEncerrar();
+    }
+
+    private void confirmarOuEncerrar() {
+        String resp;
+        do {
+            System.out.print("Deseja voltar ao menu principal? (s/n): ");
+            resp = sc.nextLine().trim().toLowerCase();
+        } while (!resp.equals("s") && !resp.equals("n"));
+        if (resp.equals("n")) {
+            System.out.println("Encerrando aplicação...");
+            System.exit(0);
+        }
+    }
+
     private void seed() {
         Usuario aluno = new Aluno("U1", "Ana Aluna", "111");
         Usuario servidor = new Servidor("U2", "Sergio Servidor", "222");
