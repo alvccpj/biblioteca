@@ -16,19 +16,19 @@ public class BibliotecaCLI {
         int op;
         do {
             System.out.println("\n=== Biblioteca Cidadã ===");
-            System.out.println("1) Listar disponíveis");
-            System.out.println("2) Listar emprestados");
+            System.out.println("1) Listar recursos disponíveis");
+            System.out.println("2) Listar recursos emprestados");
             System.out.println("3) Emprestar");
             System.out.println("4) Devolver");
-            System.out.println("5) Histórico por usuário");
-            System.out.println("6) Relatório: atrasados");
-            // novas opções de CRUD
+            System.out.println("5) Histórico de empréstimo por usuário");
+            System.out.println("6) Relatório: empréstimos atrasados");
             System.out.println("7) Cadastrar usuário");
             System.out.println("8) Editar usuário");
             System.out.println("9) Remover usuário");
             System.out.println("10) Cadastrar recurso");
             System.out.println("11) Editar recurso");
             System.out.println("12) Remover recurso");
+            System.out.println("13) Histórico de usuários cadastrados");
             System.out.println("0) Sair");
             System.out.print("Escolha: ");
             op = Integer.parseInt(sc.nextLine());
@@ -46,10 +46,11 @@ public class BibliotecaCLI {
                 case 10 -> doCadastrarRecurso();
                 case 11 -> doEditarRecurso();
                 case 12 -> doRemoverRecurso();
+                case 13 -> doListarUsuariosCadastrados();
                 }
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex.getMessage());
-                confirmarOuEncerrar(); // pergunta se deseja voltar ao menu
+                confirmarOuEncerrar(); 
             }
         } while (op != 0);
     }
@@ -75,7 +76,12 @@ public class BibliotecaCLI {
     private void doHistorico() {
         System.out.print("ID Usuário: ");
         String idU = sc.nextLine();
-        bib.historicoPorUsuario(idU).forEach(System.out::println);
+        var historico = bib.historicoPorUsuario(idU);
+        if (historico.isEmpty()) {
+            System.out.println("Nenhum histórico encontrado para este usuário.");
+        } else {
+            historico.forEach(System.out::println);
+        }
         confirmarOuEncerrar();
     }
 
@@ -90,7 +96,12 @@ public class BibliotecaCLI {
     }
 
     private void doAtrasados() {
-        bib.emprestimosAtrasados(java.time.LocalDate.now()).forEach(System.out::println);
+        var atrasados = bib.emprestimosAtrasados(java.time.LocalDate.now());
+        if (atrasados.isEmpty()) {
+            System.out.println("Não há empréstimos atrasados.");
+        } else {
+            atrasados.forEach(System.out::println);
+        }
         confirmarOuEncerrar();
     }
 
@@ -190,6 +201,16 @@ public class BibliotecaCLI {
             String anoStr = sc.nextLine().trim();
             if (!anoStr.isBlank()) r.setAnoPublicacao(Integer.parseInt(anoStr));
             System.out.println("Atualizado: " + r.getDescricao());
+        }
+        confirmarOuEncerrar();
+    }
+
+    private void doListarUsuariosCadastrados() {
+        var usuarios = bib.getUsuarios();
+        if (usuarios.isEmpty()) {
+            System.out.println("Não há usuários cadastrados.");
+        } else {
+            usuarios.forEach(u -> System.out.printf("%s - %s (%s)\n", u.getId(), u.getNome(), u.getDocumento()));
         }
         confirmarOuEncerrar();
     }
