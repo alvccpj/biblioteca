@@ -60,12 +60,17 @@ Este projeto demonstra conceitos de OO com uma aplicação de biblioteca e uma i
 
 ## Fluxo de Teste (CLI)
 
-- IDs do seed: usuários `U1` (Aluno), `U2` (Servidor), `U3` (Visitante); recursos `R1` (Livro com 3 capítulos), `R2` (Revista), `R3` (MidiaDigital). O seed empresta `R1` para `U1`.
-- 1) Listar disponíveis: confirma itens não emprestados.
-- 3) Emprestar: `R3` para `U3` → saída “Prevista: yyyy-MM-dd”; confirme voltar ao menu.
-- 2) Listar emprestados: deve mostrar `R1` e `R3` enquanto estiverem emprestados.
-- 3) Emprestar: `R1` para `U1` → erro “Item já emprestado”; confirme voltar ao menu.
-- 4) Devolver: `R1` → saída “Multa: R$ X.YZ”; confirme voltar ao menu.
-- 6) Relatório: atrasados: lista empréstimos com atraso (geralmente vazio no mesmo dia).
-- 5) Histórico por usuário: informe `U1` para ver registros.
-- 7–12) CRUD: cadastre/edite/remova usuários e recursos; todas as ações perguntam se deseja voltar ao menu.
+1. IDs do seed
+   - Usuários: `U1` (Aluno), `U2` (Servidor), `U3` (Visitante)
+   - Recursos: `R1` (Livro com 3 capítulos), `R2` (Revista), `R3` (MidiaDigital)
+   - O seed empresta `R1` para `U1`.
+
+2. Passo a passo
+   1. Listar disponíveis: confirma itens não emprestados.
+   2. Emprestar `R3` para `U3`: saída “Prevista: yyyy-MM-dd”; confirme voltar ao menu.
+   3. Listar emprestados: deve mostrar `R1` e `R3` enquanto estiverem emprestados.
+   4. Emprestar `R1` para `U1`: erro “Item já emprestado”; confirme voltar ao menu.
+   5. Devolver `R1`: saída “Multa: R$ X.YZ”; confirme voltar ao menu.
+   6. Relatório: atrasados: lista empréstimos com `data prevista < hoje`.
+   7. Histórico por usuário: informe `U1` para ver registros.
+   8. CRUD: cadastre/edite/remova usuários e recursos; todas as ações perguntam se deseja voltar ao menu.
