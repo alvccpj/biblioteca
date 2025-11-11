@@ -58,17 +58,14 @@ Este projeto demonstra conceitos de OO com uma aplicação de biblioteca e uma i
   - Abra `BibliotecaTest.java` e use “Run Test” (ícone acima da classe/métodos).
 - Exceções customizadas para fluxos inválidos (item indisponível ou empréstimo não encontrado).
 
-## Casos de uso mínimos
+## Fluxo de Teste (CLI)
 
-- O seed do CLI cria 3 usuários (Aluno, Servidor, Visitante) e 3 recursos (Livro com 3 capítulos, Revista, MidiaDigital).
-- Um empréstimo inicial é efetuado (Livro para Aluno). Use o menu para devolver e ver multa quando houver atraso.
-
-## Fluxo Rápido (IDE)
-
-- Executar a aplicação:
-  - Abra `src\br\recife\biblioteca\ui\BibliotecaCLI.java` na IDE e execute a classe diretamente.
-  - O menu interativo será exibido para testar o funcionamento.
-
-- Rodar os testes:
-  - Instale a extensão “Java Test Runner” no VS Code.
-  - Abra `test\br\recife\biblioteca\teste\BibliotecaTest.java` e clique em “Run Test” acima da classe/métodos `@Test`.
+- IDs do seed: usuários `U1` (Aluno), `U2` (Servidor), `U3` (Visitante); recursos `R1` (Livro com 3 capítulos), `R2` (Revista), `R3` (MidiaDigital). O seed empresta `R1` para `U1`.
+- 1) Listar disponíveis: confirma itens não emprestados.
+- 3) Emprestar: `R3` para `U3` → saída “Prevista: yyyy-MM-dd”; confirme voltar ao menu.
+- 2) Listar emprestados: deve mostrar `R1` e `R3` enquanto estiverem emprestados.
+- 3) Emprestar: `R1` para `U1` → erro “Item já emprestado”; confirme voltar ao menu.
+- 4) Devolver: `R1` → saída “Multa: R$ X.YZ”; confirme voltar ao menu.
+- 6) Relatório: atrasados: lista empréstimos com atraso (geralmente vazio no mesmo dia).
+- 5) Histórico por usuário: informe `U1` para ver registros.
+- 7–12) CRUD: cadastre/edite/remova usuários e recursos; todas as ações perguntam se deseja voltar ao menu.

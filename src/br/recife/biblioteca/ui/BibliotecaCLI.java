@@ -49,6 +49,7 @@ public class BibliotecaCLI {
                 }
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex.getMessage());
+                confirmarOuEncerrar(); // pergunta se deseja voltar ao menu
             }
         } while (op != 0);
     }
@@ -60,6 +61,7 @@ public class BibliotecaCLI {
         String idU = sc.nextLine();
         var emp = bib.emprestar(idR, idU);
         System.out.println("Emprestado! Prevista: " + emp.getDataPrevista());
+        confirmarOuEncerrar();
     }
 
     private void doDevolver() {
@@ -67,6 +69,7 @@ public class BibliotecaCLI {
         String idR = sc.nextLine();
         var emp = bib.devolver(idR);
         System.out.printf("Devolvido. Multa: R$ %.2f\n", emp.getMultaCalculada());
+        confirmarOuEncerrar();
     }
 
     private void doHistorico() {
